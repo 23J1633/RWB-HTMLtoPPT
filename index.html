@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web PPT Loader</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/fontawesome/css/all.min.css">
+</head>
+<body>
+
+    <!-- PPT 显示容器 -->
+    <div id="ppt-container" class="ppt-container">
+        <div id="slide-content" class="slide-content">
+            <!-- 页面内容将通过JS注入这里 -->
+            <div class="loading">正在加载配置...</div>
+        </div>
+    </div>
+
+    <!-- 控制栏 (默认隐藏，鼠标移动显示或一直显示) -->
+    <div class="controls">
+        <div class="progress-bar-bg"><div id="progress-bar" class="progress-bar"></div></div>
+        <div class="buttons">
+            <button id="btn-prev" title="上一页">◀</button>
+            <span id="page-indicator">0 / 0</span>
+            <button id="btn-next" title="下一页">▶</button>
+            <button id="btn-fullscreen" title="全屏">⛶</button>
+        </div>
+    </div>
+
+    <!-- 引入脚本 -->
+    <script src="./JavaScript/main.js"></script>
+</body>
+</html>

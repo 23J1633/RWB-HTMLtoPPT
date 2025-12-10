@@ -1,0 +1,173 @@
+:root {
+    --bg-color: #f0f2f5;
+    --slide-bg: #ffffff;
+    --text-color: #333;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* PPT 容器：保持比例 */
+.ppt-container {
+    background-color: var(--slide-bg);
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    /* 默认 16:9，会被JS动态调整 */
+    width: 90vw; 
+    aspect-ratio: 16/9;
+    max-height: 90vh;
+}
+
+/* 全屏时的样式 */
+body.fullscreen .ppt-container {
+    width: 100vw;
+    height: 100vh;
+    max-height: none;
+    aspect-ratio: auto; /* 全屏模式下铺满 */
+}
+
+/* 内容区域 */
+.slide-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 控制栏 */
+.controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.6);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 9999;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+.controls:hover { opacity: 1; }
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+button {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+button:hover { background: rgba(255,255,255,0.2); }
+
+/* 进度条 */
+.progress-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.2); border-radius: 2px; }
+.progress-bar { height: 100%; background: #4CAF50; width: 0%; transition: width 0.3s; }
+
+/* 基础动画类：用于 Slide 切换 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 页面内元素通用动画类 */
+.anim-up { animation: slideUp 0.8s ease-out forwards; opacity: 0; }
+.anim-left { animation: slideLeft 0.8s ease-out forwards; opacity: 0; }
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.5s; }
+.delay-3 { animation-delay: 0.8s; }
+
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+/* =========================================
+   新增现代风格组件与丰富动画
+   ========================================= */
+
+/* 通用布局工具 */
+.flex-center { display: flex; justify-content: center; align-items: center; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-row { display: flex; flex-direction: row; }
+.gap-20 { gap: 20px; }
+.gap-40 { gap: 40px; }
+.text-center { text-align: center; }
+
+/* 现代卡片样式 */
+.modern-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+.modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+/* 渐变背景文字 */
+.gradient-text {
+    background: linear-gradient(45deg, #2193b0, #6dd5ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* === 新增丰富动画库 === */
+
+/* 1. 弹性缩放进入 (Pop In) */
+.anim-pop { opacity: 0; animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* 2. 从右侧滑入 (Slide Right) */
+.anim-right { opacity: 0; animation: slideRight 0.8s ease-out forwards; }
+@keyframes slideRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* 3. 模糊显现 (Blur In) - 适合大文字 */
+.anim-blur { opacity: 0; animation: blurIn 1s ease forwards; }
+@keyframes blurIn {
+    from { opacity: 0; filter: blur(20px); transform: scale(1.1); }
+    to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+/* 4. 持续浮动 (Floating) - 用于图标装饰 */
+.anim-float { animation: float 3s ease-in-out infinite; }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* 延迟类扩展 */
+.delay-4 { animation-delay: 1.1s; }
+.delay-5 { animation-delay: 1.4s; }

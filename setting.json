@@ -1,0 +1,14 @@
+{
+  "projectTitle": "Web PPT 演示",
+  "aspectRatio": "16:9",
+  "clickToFlip": true,
+  "pages": [
+    "page1.html",
+    "page2.html",
+    "page3.html", 
+    "page4.html",
+    "page5.html",
+    "page6.html",
+    "page7.html" 
+  ]
+}
