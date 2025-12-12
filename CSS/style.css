@@ -41,8 +41,16 @@ body.fullscreen .ppt-container {
 .slide-content {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute; /* 关键修改：绝对定位 */
+    top: 0;
+    left: 0;
     overflow: hidden;
+    z-index: 1; /* 默认层级 */
+    background-color: var(--slide-bg); /* 确保每页都有背景底色，防止透明叠加 */
+}
+/* 确保新插入的页面在最上层 */
+.slide-content.active {
+    z-index: 2;
 }
 
 /* 控制栏 */
