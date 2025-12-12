@@ -4,7 +4,7 @@
 
 生成的项目基于轻量级 Web 演示框架，支持动画、全屏、鼠标滚轮控制和进度管理，让你可以像写网页一样写 PPT。
 
-![插件预览图](static/image/RWB.jpg)
+![插件预览图](static/image/预览.gif)
 <!-- 请在此处放置一张插件的整体预览图或 GIF -->
 
 ---
@@ -16,7 +16,7 @@
 ### 1. 快速创建项目 (Project Initialization)
 通过侧边栏的 **RWB Actions** 面板，你可以快速创建一个基于标准模板的 HTML PPT 项目。插件会自动处理 Git 模板拉取和本地环境初始化。
 
-![RWB Actions 面板截图](images/feature-create-project.png)
+![RWB Actions 面板截图](static/image/RWB面板.png)
 
 ### 2. 可视化页面管理 (Page Management)
 在 **RWB HTMLtoPPT** 资源管理器视图中，你可以像操作 PPT 幻灯片一样管理 HTML 页面：
@@ -24,7 +24,7 @@
 * **调整顺序**：通过上移/下移按钮调整页面播放顺序（自动重命名文件并更新配置）。
 * **删除页面**：一键删除页面并自动维护文件名连续性。
 
-![页面管理视图截图](images/feature-page-manager.png)
+![页面管理视图截图](static/image/管理页面.png)
 
 ### 3. AI 智能辅助 (AI Assistant)
 内置 **RWB AI Assistant**，让非前端专业人士也能轻松修改样式。
@@ -32,7 +32,7 @@
 * **上下文感知**：自动读取当前选中的 HTML 文件内容进行修改。
 * **配置灵活**：支持自定义 API Endpoint 和模型。
 
-![AI 助手截图](images/feature-ai-assistant.png)
+![AI 助手截图](static/image/AI助手.png)
 
 ### 4. 便携式 U 盘导出 (Portable Export)
 一键将项目打包导出到 U 盘或移动硬盘，生成独立运行环境，无需在演示电脑上安装 Node.js 或 VS Code。
@@ -48,8 +48,8 @@
  * 找到并双击自动生成的 **快捷方式**（通常命名为 `Click_To_Start.url` 或类似名称）。
  * 演示文稿将在默认浏览器中打开，即可开始演讲。
 
-![导出功能截图](images/feature-export.png)
-
+![导出功能截图1](static/image/导出功能.png)
+![导出功能截图2](static/image/导出功能2.png)
 ---
 
 ## ⚙️ 扩展设置 (Extension Settings)
@@ -119,6 +119,8 @@ PPT/
 1. 在 VS Code 中，右键点击 `index.html` 文件。
 2. 选择 **"Open with Live Server"**。
 3. 浏览器将自动弹出并显示 PPT。
+
+![golive功能截图](static/image/golive.png)
 
 *(备选方案：使用 Python `python -m http.server` 或 Node.js `http-server` 启动本地服务)*
 
