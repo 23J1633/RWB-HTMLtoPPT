@@ -8,6 +8,10 @@
 <!-- 插件整体功能演示 -->
 
 ---
+# 如何获取？
+## 直接在VScode拓展中搜索 “RWB HTMLtoPPT"
+## 在微软插件市场搜索“RWB HTMLtoPPT" :https://marketplace.visualstudio.com/
+## 直接下载release然后到VScode安装
 
 # 🛠️ 第一部分：VS Code 插件功能指南
 
