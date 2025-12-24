@@ -10,6 +10,9 @@ const contentDiv = document.getElementById('slide-content');
 const progressBar = document.getElementById('progress-bar');
 const pageIndicator = document.getElementById('page-indicator');
 
+// 定义存储在浏览器中的键名
+const STORAGE_KEY = 'ppt_current_page_index';
+
 async function initPPT() {
     try {
         if (window.location.protocol === 'file:') {
@@ -30,7 +33,18 @@ async function initPPT() {
 
         totalPages = settings.pages.length;
         if (totalPages > 0) {
-            loadPage(0);
+            /* === 修改开始：初始化时读取保存的页码 === */
+            // 尝试从 localStorage 获取上次的页码
+            let savedIndex = parseInt(localStorage.getItem(STORAGE_KEY));
+
+            // 验证页码是否有效（必须是数字，且在 0 到 总页数 之间）
+            if (isNaN(savedIndex) || savedIndex < 0 || savedIndex >= totalPages) {
+                savedIndex = 0; // 如果无效或没有记录，默认第一页
+            }
+            
+            // 加载计算出的页码
+            loadPage(savedIndex);
+            /* === 修改结束 === */
         } else {
             contentDiv.innerHTML = '<div style="padding:20px; text-align:center;">setting.json 中未配置页面</div>';
         }
@@ -54,6 +68,11 @@ async function loadPage(index) {
     if (index < 0 || index >= totalPages) return;
 
     currentPageIndex = index;
+    
+    /* === 修改开始：每次翻页时保存当前页码 === */
+    localStorage.setItem(STORAGE_KEY, index);
+    /* === 修改结束 === */
+
     updateControls();
 
     try {
@@ -92,6 +111,7 @@ function changePage(offset) {
             document.exitFullscreen().catch(err => {
                 console.warn("退出全屏失败:", err);
             });
+            // 退出全屏后回到第一页
             loadPage(0);
             return; 
         }
@@ -152,26 +172,22 @@ function setupEventListeners() {
         }
     });
 
-    // === 新增：鼠标滚轮翻页逻辑 ===
-    let lastWheelTime = 0; // 上次滚动的时间戳
-    const wheelCooldown = 800; // 冷却时间 800ms (配合动画时间，防止连翻)
+    // === 鼠标滚轮翻页逻辑 ===
+    let lastWheelTime = 0; 
+    const wheelCooldown = 800; 
 
     document.addEventListener('wheel', (e) => {
         const now = Date.now();
-        // 检查冷却时间
         if (now - lastWheelTime < wheelCooldown) return;
 
-        // 检查滚动阈值（防止笔记本触摸板微小抖动触发）
         if (Math.abs(e.deltaY) < 30) return;
 
         if (e.deltaY > 0) {
-            // 向下滚动 -> 下一页
             changePage(1);
             lastWheelTime = now;
         } else {
-            // 向上滚动 -> 上一页
             changePage(-1);
             lastWheelTime = now;
         }
-    }, { passive: true }); // passive: true 提升滚动性能
+    }, { passive: true }); 
 }
